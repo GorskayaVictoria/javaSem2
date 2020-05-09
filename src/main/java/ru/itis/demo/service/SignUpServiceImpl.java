@@ -3,6 +3,7 @@ package ru.itis.demo.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import ru.itis.demo.dto.RegForm;
 import ru.itis.demo.dto.SignUpDto;
 import ru.itis.demo.dto.UserDto;
 import ru.itis.demo.models.Role;
@@ -31,7 +32,7 @@ public class SignUpServiceImpl implements SignUpService {
 
 
     @Override
-    public void signUp(SignUpDto form) {
+    public void signUp(RegForm form) {
         User user = User.builder()
                 .email(form.getEmail())
                 .hashPassword(passwordEncoder.encode(form.getPassword()))
@@ -41,7 +42,7 @@ public class SignUpServiceImpl implements SignUpService {
                 .role(Role.USER)
                 .confirmCode(UUID.randomUUID().toString())
                 .build();
-
+        System.out.println(user);
         usersRepository.save(user);
         Map< String, Object > model = new HashMap<>();
         model.put("user", user);

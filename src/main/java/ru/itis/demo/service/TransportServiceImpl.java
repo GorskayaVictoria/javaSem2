@@ -6,6 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.demo.dto.TransportDto;
+import ru.itis.demo.dto.TransportResult;
 import ru.itis.demo.dto.UserDto;
 import ru.itis.demo.dto.UsersSearchResult;
 import ru.itis.demo.models.*;
@@ -35,6 +36,15 @@ public class TransportServiceImpl implements TransportService{
         return from(transportsRepository.findAll());
     }
 
+    @Override
+    public TransportResult getTransports(Integer page) {
+        PageRequest pageRequest = PageRequest.of(page, 3);
+        Page<Transport> pageResult = transportsRepository.findAll(pageRequest);
+        return TransportResult.builder()
+                .transports(from(pageResult.getContent()))
+                .count(pageResult.getTotalPages())
+                .build();
+    }
 
 
     @Override

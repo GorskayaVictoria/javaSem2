@@ -7,6 +7,7 @@
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
  <link rel="stylesheet" href="/css/style.css">
+
 		<div class=" products">
     <#list transports as trans>
         <div class="card product">
@@ -26,6 +27,14 @@
     </#list>
 
 		</div>
+
+
+<div>
+
+
+            <a href="/transports?page=${page - 1}"><p>Назад</p></a>
+            <a href="/transports?page=${page + 1}"><p>Вперед</p></a>
+</div>
 <#--<div class="content">-->
     <#--<p><input id="name" oninput="f()"/></p>-->
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.demo.dto.TransportDto;
+import ru.itis.demo.dto.TransportResult;
 import ru.itis.demo.models.Transport;
 import ru.itis.demo.service.TransportService;
 
@@ -25,6 +26,7 @@ public class TransportController {
 
     @GetMapping("/transport/{transport-id}")
     public String getConcreteUserPage(@PathVariable("transport-id") Long transportId, Model model) {
+
         TransportDto transport = transportService.getConcreteTransport(transportId);
         model.addAttribute("transport", transport);
         return "transport_page";
@@ -33,28 +35,15 @@ public class TransportController {
 
 
     @GetMapping("/transports")
-    public String getUsersPage(Model model) {
-            List<TransportDto> transports = transportService.getTransports();
-            model.addAttribute("transports", transports);
+    public String getUsersPage(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page) {
+            model.addAttribute("page", page);
+        System.out.println(page);
+            TransportResult  transports = transportService.getTransports(page);
+            model.addAttribute("transports", transports.getTransports());
             return "trans";
 
     }
-//    @GetMapping("/searchTrans")
-//    @ResponseBody
-//    public String searchUsers(@RequestParam("name") String name) throws JSONException, JsonProcessingException {
-//        System.out.println("dfghjkjhg");
-//        JSONArray ja = new JSONArray();
-//        ObjectMapper mapper = new ObjectMapper();
-//        for (TransportDto transportDto: transportService.search(name)) {
-//            ja.put(mapper.writeValueAsString(transportDto));
-//        }
-//
-//        JSONObject jo = new JSONObject();
-//        jo.put("objects", ja);
-//
-//        return (jo.toString());
-//
-//    }
+
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/newTrans")
@@ -67,7 +56,7 @@ public class TransportController {
     @PostMapping("/newTrans")
     public String handleFileUpload(TransportDto form) throws IOException {
         // сохраняем файл на диск
-        System.out.println("form");
+        System.out.println(form);
         transportService.regNewTrans(form);
         // отправляем пользователю полный путь к этому файлу
         return "redirect:/transports";

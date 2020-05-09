@@ -2,15 +2,22 @@ package ru.itis.demo.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.DefaultMessageCodesResolver;
 import org.springframework.validation.MessageCodesResolver;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+
+import javax.validation.ValidatorFactory;
+
 
 @Configuration
 public class LocalizationConfig implements WebMvcConfigurer {
@@ -29,7 +36,6 @@ public class LocalizationConfig implements WebMvcConfigurer {
         return localeChangeInterceptor;
     }
 
-
     @Bean
     public LocaleResolver localeResolver(){
         CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver();
@@ -37,6 +43,15 @@ public class LocalizationConfig implements WebMvcConfigurer {
         cookieLocaleResolver.setCookieMaxAge(60*60*24*365);
         return cookieLocaleResolver;
 
+    }
+
+
+    @Bean
+    public LocalValidatorFactoryBean getValidator() {
+        LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+        System.out.println("ghjghj");
+        bean.setValidationMessageSource(messageSource());
+        return bean;
     }
 
     @Bean

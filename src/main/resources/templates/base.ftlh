@@ -8,6 +8,7 @@
     <!doctype html>
 
 <html lang="en">
+    <#import "spring.ftl" as spring />
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,9 +16,10 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="/js/jquery.js"></script>
-    <script src="/jquery-3.4.1.min.js"></script>
+    <script src="jquery-3.4.1.min.js"></script>
 </head>
-<body>
+    <body>
+
 <nav class= "navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: rgba(11,54,62,0.71);">
     <a class="navbar-brand" href="#">Retro Baby</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @Builder
 public class UserDto {
     private Long id;
+//    private Integer age;
     private String name;
     private String email;
     private String role;
@@ -24,6 +25,7 @@ public class UserDto {
     public static UserDto from(User user) {
         return UserDto.builder()
                 .id(user.getId())
+//                .age(user.getAge())
                 .name(user.getName())
                 .email(user.getEmail())
                 .role(user.getRole().name())

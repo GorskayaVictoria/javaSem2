@@ -2,8 +2,10 @@
 
 <#macro content>
     <link rel="stylesheet" href="/css/login_page_style.css" type="text/css">
-<div class="registration_window">
-    <form method="POST" enctype="multipart/form-data" novalidate>
+    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+    <div class="registration_window">
+        <form method="POST" enctype="multipart/form-data" novalidate>
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
             <div class="form_row">
                 <div class="form_field2">
                     <label for="name">Name<br></label>
@@ -31,48 +33,51 @@
             <div>
                 <button type="submit" class="btn btn-secondary submit_button">Submit</button>
             </div>
-    </form>
+        </form>
 
 
-    <div class="form_row">
-        <div>
-            <input type="file" id="file" name="file" placeholder="Имя файла..."/>
+        <div class="form_row">
+            <div>
 
-            <button onclick="sendFile()">загрузка</button>
+                <input type="file" id="file" name="file" placeholder="Имя файла..."/>
+
+                <button type="submit"  onclick="sendFile()" >загрузка</button>
+
+            </div>
 
         </div>
-
     </div>
-</div>
 
-<script>
-    function sendFile() {
-        // данные для отправки
-        let formData = new FormData();
-        // забрал файл из input
-        let files = ($('#file'))[0]['files'];
-        // добавляю файл в formData
-        [].forEach.call(files, function (file, i, files) {
-            formData.append("file", file);
-        });
+    <script>
+        function sendFile() {
+            // данные для отправки
+            let formData = new FormData();
+            // забрал файл из input
+            let files = ($('#file'))[0]['files'];
+            // добавляю файл в formData
+            [].forEach.call(files, function (file, i, files) {
+                formData.append("file", file);
+            });
 
-        $.ajax({
-            type: "POST",
-            url: "/files",
-            data: formData,
-            processData: false,
-            contentType: false
-        })
+            $.ajax({
+                type: "POST",
+                url: "/files",
+                headers: {"X-CSRF-TOKEN": $("input[name='_csrf']").val()},
+                data: formData,
+                processData: false,
+                contentType: false
+            })
                 .done(function (response) {
                     let fileUrl =  ""+ response;
+                    $('#filename').empty();
                     $('#filename').append('<input type="hidden" name="filePath" value="'+ fileUrl + '">');
                 })
                 .fail(function () {
                     alert(formData)
                 })
 
-    }
-</script>
+        }
+    </script>
 
 
 <#--    <script type="application/javascript">-->

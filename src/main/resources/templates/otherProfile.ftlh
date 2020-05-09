@@ -3,7 +3,12 @@
 <#macro content>
 <link rel="stylesheet" href="/css/styleProfile.css" type="text/css">
 
-
+    <#import "spring.ftl" as spring />
+    <style>
+        .error {
+            color: #ff0000;
+        }
+    </style>
 
 
 <section class="l-page">
@@ -31,6 +36,10 @@
 
 	</span>
 </div>
+
+
+
+    </div>
 
 </section>
 
