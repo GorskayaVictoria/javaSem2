@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itis.demo.models.Transport;
 import ru.itis.demo.models.User;
 
 import java.util.List;
@@ -20,16 +21,17 @@ public class UserDto {
     private String email;
     private String role;
     private String state;
+    private List<Transport> transports;
 
 
     public static UserDto from(User user) {
         return UserDto.builder()
                 .id(user.getId())
-//                .age(user.getAge())
                 .name(user.getName())
                 .email(user.getEmail())
                 .role(user.getRole().name())
                 .state(user.getState().name())
+                .transports(user.getTransportList())
                 .build();
     }
 
@@ -38,6 +40,8 @@ public class UserDto {
                 .map(UserDto::from)
                 .collect(Collectors.toList());
     }
+
+
 
 
 }

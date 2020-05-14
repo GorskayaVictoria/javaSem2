@@ -1,7 +1,9 @@
 package ru.itis.demo.controllers;
 
 
+import org.hibernate.annotations.Where;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +27,7 @@ public class TransportController {
     private TransportService transportService;
 
     @GetMapping("/transport/{transport-id}")
-    public String getConcreteUserPage(@PathVariable("transport-id") Long transportId, Model model) {
+    public String getConcreteTransport(@PathVariable("transport-id") Long transportId, Model model) {
 
         TransportDto transport = transportService.getConcreteTransport(transportId);
         model.addAttribute("transport", transport);
@@ -35,13 +37,19 @@ public class TransportController {
 
 
     @GetMapping("/transports")
-    public String getUsersPage(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page) {
+    public String getTransports(Model model,@RequestParam(value = "page", defaultValue = "0") Integer page) {
             model.addAttribute("page", page);
-        System.out.println(page);
             TransportResult  transports = transportService.getTransports(page);
+        System.out.println(transports);
             model.addAttribute("transports", transports.getTransports());
             return "trans";
 
+    }
+
+    @GetMapping("/hi")
+    public ResponseEntity<?> hi() {
+        transportService.convert();
+        return ResponseEntity.ok().build();
     }
 
 

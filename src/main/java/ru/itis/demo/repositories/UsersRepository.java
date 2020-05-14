@@ -5,6 +5,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import ru.itis.demo.dto.TransportDto;
 import ru.itis.demo.models.State;
 import ru.itis.demo.models.User;
 
@@ -28,6 +29,5 @@ public interface UsersRepository extends JpaRepository<User, Long> {
             "upper(user.email) like concat('%', upper(:query), '%') or " +
             "upper(user.name) like concat('%', upper(:query), '%')")
     List<User> searchUsers(@Param("query") String query);
-
 
 }

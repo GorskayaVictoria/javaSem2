@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 import sun.plugin2.message.Serializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -35,4 +37,10 @@ public class User implements Serializable {
     private Role role;
 
     private String confirmCode;
+
+
+
+    @OneToMany(mappedBy = "owner")
+    @Where(clause = "enable = 'true'")
+    private List<Transport> transportList;
 }

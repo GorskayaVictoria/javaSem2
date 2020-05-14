@@ -1,3 +1,5 @@
 #GET localhost:8080/search/users?q=i&page=0&size=3&state=CONFIRMED
 GET localhost:8080/searchTrans?name=Ж
 ###
+
+GET localhost:8080/hi

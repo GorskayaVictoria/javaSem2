@@ -2,6 +2,7 @@ package ru.itis.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itis.demo.dto.TransportDto;
 import ru.itis.demo.dto.UserDto;
 import ru.itis.demo.models.User;
 import ru.itis.demo.repositories.UsersRepository;
@@ -46,4 +47,6 @@ public class UsersServiceImpl implements UsersService {
     public List<User> searchUsers(String name) {
         return usersRepository.searchUsers(name);
     }
+
+
 }

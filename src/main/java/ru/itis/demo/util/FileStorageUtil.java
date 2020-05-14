@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.demo.models.FileInfo;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -35,6 +36,7 @@ public class FileStorageUtil {
     public void copyToStorage(MultipartFile file, String storageFileName) throws IOException {
         Files.copy(file.getInputStream(), Paths.get(storagePath, storageFileName));
     }
+
 
     // принимает на вход файл в формате Multipart
     // сохраняет его в БД
@@ -72,5 +74,6 @@ public class FileStorageUtil {
         // новое имя файла - UUID + . + расширение файла
         return newFileName + "." + extension;
     }
+
 }
 

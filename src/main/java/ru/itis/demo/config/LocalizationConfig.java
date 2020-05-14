@@ -49,7 +49,6 @@ public class LocalizationConfig implements WebMvcConfigurer {
     @Bean
     public LocalValidatorFactoryBean getValidator() {
         LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-        System.out.println("ghjghj");
         bean.setValidationMessageSource(messageSource());
         return bean;
     }

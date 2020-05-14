@@ -1,5 +1,10 @@
 package ru.itis.demo.service;
 
+import lombok.SneakyThrows;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.rendering.ImageType;
+import org.apache.pdfbox.rendering.PDFRenderer;
+import org.apache.pdfbox.tools.imageio.ImageIOUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,6 +19,9 @@ import ru.itis.demo.repositories.FileInfoRepository;
 import ru.itis.demo.repositories.TransportsRepository;
 import ru.itis.demo.util.FileStorageUtil;
 
+import javax.transaction.Transactional;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLOutput;
 import java.time.LocalDateTime;
@@ -45,6 +53,7 @@ public class TransportServiceImpl implements TransportService{
                 .count(pageResult.getTotalPages())
                 .build();
     }
+
 
 
     @Override
@@ -107,6 +116,42 @@ public class TransportServiceImpl implements TransportService{
         return transportsRepository.searchTrans(name);
     }
 
+
+    @SneakyThrows
+    public void convertPdfToJpg(Transport transport, String newFileName) {
+        System.out.println(newFileName);
+        System.out.println(transport.getSourceFile());
+        PDDocument pdf = PDDocument.load(transport.getSourceFile());
+        PDFRenderer renderer = new PDFRenderer(pdf);
+        BufferedImage image = renderer.renderImageWithDPI(0, 300, ImageType.RGB);
+        ImageIOUtil.writeImage(image, newFileName, 300);
+        pdf.close();
+        File resultFile = new File(newFileName);
+        System.out.println(resultFile);
+
+        transport.setSourceFile(resultFile);
+        transport.setFilePath(newFileName.split("\\/")[10]);
+        System.out.println("hii");
+    }
+
+    @Transactional
+    @Override
+    public void convert() {
+        List<Transport> transports = transportsRepository.findAll();
+
+
+        for (Transport tran : transports) {
+            String newFileName = "/Users/admin/IdeaProjects/demo/src/main/resources/static/img/"+  UUID.randomUUID().toString() + ".jpg";
+            System.out.println(tran.getFilePath());
+            System.out.println((tran.getFilePath().split("\\.")[1]));
+            if (tran.getFilePath().split("\\.")[1].equals("pdf")) {
+                convertPdfToJpg(tran, newFileName);
+                System.out.println("fghj");
+                System.out.println(tran.getFilePath());
+                transportsRepository.save(tran);
+            }
+        }
+    }
 
 
 

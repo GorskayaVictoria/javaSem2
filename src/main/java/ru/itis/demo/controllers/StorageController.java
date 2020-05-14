@@ -47,7 +47,6 @@ public class StorageController {
     @PostMapping("/files")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) throws IOException {
         // сохраняем файл на диск
-        System.out.println("her");
         String filePath = service.saveFile(file);
         // отправляем пользователю полный путь к этому файлу
         return ResponseEntity

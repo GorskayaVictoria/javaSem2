@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.itis.demo.dto.TransportDto;
+import ru.itis.demo.dto.TransportResult;
 import ru.itis.demo.dto.UserDto;
+import ru.itis.demo.models.Transport;
 import ru.itis.demo.models.User;
 import ru.itis.demo.service.TransportService;
 import ru.itis.demo.service.UsersService;
@@ -59,5 +61,17 @@ public class UsersController {
     public List<User> searchUsers(@RequestParam("name") String name) {
         return usersService.searchUsers(name);
     }
+
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/user/{user-id}/transports")
+    public String getMyTransports(Model model,@PathVariable("user-id") Long userId) {
+        UserDto user = usersService.getConcreteUser(userId);
+        List<Transport> transports = user.getTransports();
+        model.addAttribute("transports", transports);
+        return "trans2";
+
+    }
+
 
 }

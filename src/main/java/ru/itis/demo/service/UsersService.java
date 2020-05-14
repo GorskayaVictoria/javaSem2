@@ -1,5 +1,6 @@
 package ru.itis.demo.service;
 
+import ru.itis.demo.dto.TransportDto;
 import ru.itis.demo.dto.UserDto;
 import ru.itis.demo.models.User;
 
@@ -14,5 +15,7 @@ public interface UsersService {
 
     void deleteUser(Long userId);
     List<User> searchUsers(String name);
+
+//    List<TransportDto> getTransports(Long userId);
 
 }
