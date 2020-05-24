@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Where;
-import sun.plugin2.message.Serializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,32 +16,18 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "itis_user")
-public class User implements Serializable {
+@Table(name = "statistic")
+public class Statistic {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String email;
-//    private Integer age;
-    private String hashPassword;
 
     private LocalDateTime createdAt;
 
     @Enumerated(value = EnumType.STRING)
-    private State state;
-
-    @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    private String confirmCode;
-
-    @OneToMany(mappedBy = "user")
-    private List<Statistic> statisticList;
-
-
-//    @OneToMany(mappedBy = "owner")
-//    @Where(clause = "enable = 'true'")
-//    private List<Transport> transportList;
+    @ManyToOne
+    private User user;
 }

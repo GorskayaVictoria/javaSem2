@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import ru.itis.demo.dto.TransportDto;
+import ru.itis.demo.models.Role;
 import ru.itis.demo.models.State;
 import ru.itis.demo.models.User;
 
@@ -15,6 +16,7 @@ import java.util.Optional;
 public interface UsersRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
     List<User> findAllByNameContainsIgnoreCase(String name);
+    List<User> findAllByRole(Role role);
     Optional<User> findByConfirmCode(String confirmCode);
     void deleteUserById(Long id);
 

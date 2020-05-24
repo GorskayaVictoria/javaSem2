@@ -47,7 +47,10 @@
 						<div class="form_field2">
 							<@spring.message 'registration_page.page.password'/>: <br>
 							<@spring.formInput "regForm.confirmPassword"/>
-							<@spring.showErrors "<br>","error"/>
+							<@spring.showErrors "regForm.valid","error"/>
+							<#if hasErrors??>
+								<div class="error"><@spring.message 'errors.password.eq'></@spring.message></div>
+							</#if>
 							<br><br>
 						</div>
 
