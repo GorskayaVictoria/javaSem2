@@ -28,13 +28,8 @@ public class PartnerStatisticSchedulers {
     @Transactional
     @Scheduled(cron = "0 10 * * * ?")
     public void run() {
-        System.out.println("hiii");
         List<User> partners = usersRepository.findAllByRole(Role.USER);
-        System.out.println("hiii");
-
         for (User partner : partners) {
-            System.out.println("hiii");
-            System.out.println(partner.getName());
             statisticService.saveStatistics(partner);
         }
     }

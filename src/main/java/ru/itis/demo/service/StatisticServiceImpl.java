@@ -16,13 +16,11 @@ public class StatisticServiceImpl implements StatisticService {
 
     @Override
     public void saveStatistics(User user) {
-        System.out.println("hi1");
         Statistic statistic = Statistic.builder()
                 .createdAt(LocalDateTime.now())
                 .role(user.getRole())
                 .user(user)
                 .build();
-        System.out.println("hi2");
         statisticRepository.save(statistic);
     }
 }
