@@ -28,12 +28,10 @@ public class SignUpController {
 
     @PostMapping("/signUp")
     public String signUp(@Valid RegForm form, BindingResult bindingResult, Model model) {
-        System.out.println("ghgh");
-        System.out.println(form);
-        System.out.println(bindingResult.getAllErrors());
         model.addAttribute("regForm", form);
         if (!bindingResult.hasErrors()) {
             service.signUp(form);
+            return "redirect:/start";
         }
         return "registration_page";
     }

@@ -25,7 +25,6 @@ public class UsersServiceImpl implements UsersService {
     }
 
 
-
     @Override
     public UserDto getConcreteUser(Long userId) {
         User user = usersRepository.getOne(userId);

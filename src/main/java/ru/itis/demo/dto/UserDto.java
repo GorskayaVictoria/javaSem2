@@ -31,7 +31,7 @@ public class UserDto {
                 .email(user.getEmail())
                 .role(user.getRole().name())
                 .state(user.getState().name())
-//                .transports(user.getTransportList())
+                .transports(user.getTransportList())
                 .build();
     }
 

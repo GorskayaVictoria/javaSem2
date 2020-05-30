@@ -1,9 +1,7 @@
 package ru.itis.demo.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.sun.org.glassfish.external.statistics.Statistic;
+import lombok.*;
 import org.hibernate.annotations.Where;
 import sun.plugin2.message.Serializer;
 
@@ -13,6 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
+@ToString(exclude = { "transportList" })
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -38,11 +37,10 @@ public class User implements Serializable {
 
     private String confirmCode;
 
-    @OneToMany(mappedBy = "user")
-    private List<Statistic> statisticList;
+//    @OneToMany(mappedBy = "user")
+//    private List<Statistic> statisticList;
 
-
-//    @OneToMany(mappedBy = "owner")
-//    @Where(clause = "enable = 'true'")
-//    private List<Transport> transportList;
+    @OneToMany(mappedBy = "owner")
+    @Where(clause = "enable = 'true'")
+    private List<Transport> transportList;
 }

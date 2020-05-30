@@ -66,7 +66,11 @@ public class UsersController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/user/{user-id}/transports")
     public String getMyTransports(Model model,@PathVariable("user-id") Long userId) {
+        System.out.println(userId);
         UserDto user = usersService.getConcreteUser(userId);
+        System.out.println("hjkhjkhk");
+        System.out.println(user);
+        System.out.println("jhjhk");
         List<Transport> transports = user.getTransports();
         model.addAttribute("transports", transports);
         return "trans2";

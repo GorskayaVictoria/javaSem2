@@ -54,12 +54,7 @@
 							<br><br>
 						</div>
 
-
-
-
-
 					</div>
-
 
 					<div>
 						<button type="submit" class="btn btn-secondary submit_button"><@spring.message 'registration_page.page.submit'/></button>

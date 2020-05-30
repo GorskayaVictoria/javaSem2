@@ -2,8 +2,10 @@ package ru.itis.demo.dto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.Type;
 import org.hibernate.validator.constraints.Email;
 
+import javax.swing.*;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -24,7 +26,6 @@ public class RegForm {
     @NotNull(message = "{errors.password.required}")
     @Size(min = 6, message = "{errors.password.size}")
     private String password;
-
 
 
     @NotNull(message = "{errors.password.required}")

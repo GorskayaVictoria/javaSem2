@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itis.demo.models.Transport;
 import ru.itis.demo.models.Type;
+import ru.itis.demo.models.User;
 
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class TransportDto {
     private Type type;
     private String filePath;
     private Boolean enable;
+    private User owner;
 
     public static TransportDto from(Transport transport) {
         return TransportDto.builder()
@@ -34,6 +36,7 @@ public class TransportDto {
                 .type(transport.getType())
                 .city(transport.getCity())
                 .enable(transport.getEnable())
+                .owner(transport.getOwner())
                 .filePath(transport.getFilePath())
                 .build();
     }

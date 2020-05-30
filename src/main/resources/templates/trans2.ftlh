@@ -8,7 +8,7 @@
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
  <link rel="stylesheet" href="/css/style.css">
 
-		<div class=" products">
+    <div class=" products">
     <#list transports as trans>
         <div class="card product">
             <div class="card-body">
